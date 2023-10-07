@@ -1,0 +1,17 @@
+Bookings
+create /create-booking
+read /bookings
+update/delete /booking-id
+
+Rooms
+create /create-room
+read /rooms
+update/delete /room-id
+
+Users 
+create /create-user
+read /Users
+update/delete /user-id
+
+Contact
+read/view /contact

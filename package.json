@@ -1,0 +1,75 @@
+{
+  "name": "dashboard-miranda",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "http://dasboard-miranda.s3-website.eu-west-3.amazonaws.com/",
+  "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-private-property-in-object": "^7.22.11",
+    "@babel/preset-react": "^7.22.5",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.5.3",
+    "@types/node": "^20.4.2",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@types/react-redux": "^7.1.25",
+    "@types/react-slick": "^0.23.10",
+    "babel-preset-react-app": "^10.0.1",
+    "cross-fetch": "^4.0.0",
+    "dotenv": "^16.3.1",
+    "gh-pages": "^6.0.0",
+    "react": "^18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^18.2.0",
+    "react-dropdown": "^1.11.0",
+    "react-icons": "^4.10.1",
+    "react-redux": "^8.1.1",
+    "react-router-dom": "^6.14.0",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "react-spinners": "^0.13.8",
+    "react-toastify": "^9.1.3",
+    "redux": "^4.2.1",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.0.0-rc.6",
+    "typescript": "5.0.4",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open",
+    "cypress-run": "cypress run"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "cypress": "^12.17.1",
+    "jest-styled-components": "^7.1.1",
+    "react-test-renderer": "^18.2.0"
+  }
+}
