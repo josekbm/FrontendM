@@ -1,39 +1,28 @@
-import fetch from 'cross-fetch';
+import axios from 'axios';
 
-export const CrossFetch = async (
+export const AxiosRequest = async (
   endpoint: string,
   method: string,
-  body: any,
+  data: any,
 ) => {
   try {
-    const url = process.env.REACT_APP_API_URL;
+    const apiURL = process.env.REACT_APP_API_URL;
     const token = getToken();
-    let jsonBody = null;
-    /*if (body) {
-      jsonBody = JSON.stringify(body);
-    }*/
-    console.log(body);
-    console.log(jsonBody);
-    const response = await fetch(`${url}${endpoint}`, {
+       
+    console.log(token);
+    
+    const response = await axios({
       method: method,
-      mode: 'cors',
+      url: `${apiURL}${endpoint}`,
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body,
+      data: data,
       
     });
-    console.log(response);
-    
-
-    const data = await response.json();
-    if (response.ok) {
-      return data;
-    } else {
-      console.log(response);
-      throw new Error(response.statusText);
-    }
+    console.log(response.data);
+    return response.data    
   } catch (error) {
     console.log(error);
     
@@ -41,12 +30,13 @@ export const CrossFetch = async (
 };
 
 function getToken() {
-  let user = localStorage.getItem('user');
+  let userString = localStorage.getItem('user');
 
-  if (!user) {
-    return '';
+  if (userString) {
+    const user = JSON.parse(userString);
+    return user.token;
   }
   
-  return JSON.parse(user).token;
+  return "User no existe o no tiene token"
   
 }

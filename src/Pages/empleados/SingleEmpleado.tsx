@@ -50,19 +50,19 @@ export const SingleEmpleado = () => {
 
   useEffect(() => {
     if (getEmpleadoData && empleadoId) {
-      if (empleadoId.UPN !== getEmpleadoData.UPN) {
-        dispatch(getEmpleado(empleadoId.UPN as string));
+      if (empleadoId.upn !== getEmpleadoData.upn) {
+        dispatch(getEmpleado(empleadoId.upn as string));
       }
     }
 
     if (getEmpleadoData) {
-      setEmpleadoUPN(getEmpleadoData.UPN);
+      setEmpleadoUPN(getEmpleadoData.upn);
       setEmpleadoPassword(getEmpleadoData.password);
-      setEmpleadoFechaNacimiento(getEmpleadoData.FechaNacimiento);
-      setEmpleadoNombre(getEmpleadoData.Nombre);
-      setEmpleadoApellidos(getEmpleadoData.Apellidos);
-      setEmpleadoResponsable(getEmpleadoData.Responsable);
-      setEmpleadoRol(getEmpleadoData.Rol);
+      setEmpleadoFechaNacimiento(getEmpleadoData.fechaNacimiento);
+      setEmpleadoNombre(getEmpleadoData.nombre);
+      setEmpleadoApellidos(getEmpleadoData.apellidos);
+      setEmpleadoResponsable(getEmpleadoData.responsable);
+      setEmpleadoRol(getEmpleadoData.rol);
       
     }
   }, [dispatch, getEmpleadoStatus, empleadoId.UPN, getEmpleadoData]);
@@ -82,20 +82,20 @@ export const SingleEmpleado = () => {
     } else {
       if (getEmpleadoData) {
         const empleado = {
-          UPN: getEmpleadoData.UPN,
-          Nombre: empleadoNombre,
-          Apellidos: empleadoApellidos,
-          FechaNacimiento: empleadoFechaNacimiento,
+          upn: getEmpleadoData.upn,
+          nombre: empleadoNombre,
+          apellidos: empleadoApellidos,
+          fechaNacimiento: empleadoFechaNacimiento,
           password: empleadoPassword,
-          Responsable: empleadoResponsable,
-          Rol: empleadoRol,
+          responsable: empleadoResponsable,
+          rol: empleadoRol,
                     
         };
         dispatch(editEmpleado(empleado)).then(() => {
-          dispatch(getEmpleado(empleado.UPN));
+          dispatch(getEmpleado(empleado.upn));
           toastSuccess("User modified!");
         });
-        dispatch(getEmpleado(empleado.UPN));
+        dispatch(getEmpleado(empleado.upn));
         console.log(getEmpleadoData);
         setEdit(false);
       }
@@ -109,7 +109,7 @@ export const SingleEmpleado = () => {
       </>
     );
   } else {
-    if (getEmpleadoData.UPN === empleadoId.UPN) {
+    if (getEmpleadoData.upn === empleadoId.upn) {
       if (edit !== true) {
         return (
           <>
@@ -118,7 +118,7 @@ export const SingleEmpleado = () => {
                 <CardHeader>
                   <FiArrowLeftCircle
                     onClick={() => {
-                      navigate("/users");
+                      navigate("/");
                     }}
                   />
                   <FiEdit
@@ -130,27 +130,27 @@ export const SingleEmpleado = () => {
 
                 <TitleRow>
                   <UserImage>
-                    <img src="#"alt="" />
+                    <img src="https://randomuser.me/api/portraits/lego/1.jpg"alt="" />
                   </UserImage>
                   <CardTitle>
-                    <h2>{getEmpleadoData.Nombre}</h2>
-                    <h5>{getEmpleadoData.Rol}</h5>
+                    <h2>{getEmpleadoData.nombre}</h2>
+                    <h5>{getEmpleadoData.rol}</h5>
                   </CardTitle>
                 </TitleRow>
                 <FeaturesRow>
                   <CardItem>
                     <h6>UPN</h6>
-                    <h5>{getEmpleadoData.UPN}</h5>
+                    <h5>{getEmpleadoData.upn}</h5>
                   </CardItem>
                   <CardItem>
                     <h6>Responsable</h6>
-                    <h5>{getEmpleadoData.Responsable}</h5>
+                    <h5>{getEmpleadoData.responsable}</h5>
                   </CardItem>
                 </FeaturesRow>
                 <FeaturesRow>
                   <CardItem>
                     <h6>Date of Birth</h6>
-                    <h5>{getEmpleadoData.FechaNacimiento}</h5>
+                    <h5>{getEmpleadoData.fechaNacimiento}</h5>
                   </CardItem>
                 </FeaturesRow>
                 <FeaturesRow>
@@ -173,7 +173,7 @@ export const SingleEmpleado = () => {
                 <CardHeader>
                   <FiArrowLeftCircle
                     onClick={() => {
-                      navigate("/users");
+                      navigate("/");
                     }}
                   />
                   <p>{fieldError}</p>

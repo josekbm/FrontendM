@@ -6,6 +6,7 @@ import { EditButton } from "../../Components/Button";
 import logo from "../../Assets/Logo.png";
 import { useLogin } from "../../context/LoginProvider";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 let toastMSG = (msg = "Wrong User") => {
   toast.error(msg, {
@@ -22,16 +23,19 @@ let toastMSG = (msg = "Wrong User") => {
 
 const loginApi = async (UPN: String, password: String) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}usuario/login`, {
+    const response = await axios(`${process.env.REACT_APP_API_URL}usuario/login`, {
       method: "POST",
-      //mode: "cors",
-      body: JSON.stringify({ UPN: UPN, password: password }),
+      
+      data: JSON.stringify({ UPN: UPN, password: password }),
       headers: { "Content-type": "application/json;charset=UTF-8" },
+      
     });
-    if (!response.ok) {
+    console.log(response.data)
+    if (!response.data.success) {
       toastMSG("Wrong User");
     } else {
-      const data = await response.json();
+      const data = response.data;
+      console.log(data)
       return data;
     }
   } catch (e) {
@@ -66,7 +70,7 @@ export function Login(props: any) {
     }
     login.dispatch({ type: "login", user: { mail, pass, token } });
     setTimeout(() => {
-      if (localStorage.getItem("user")) {
+      if (localStorage.getItem("token")) {
       }
     }, 100);
     setTimeout(() => navigate("/"), 100);
@@ -88,7 +92,7 @@ export function Login(props: any) {
           <h2>Midway Employee Dashboard</h2>
         </Logo>
         <p>
-          (Use email=<strong> user1@midwaytest.tech </strong> and password=
+          (Use email=<strong> usuario1@midwaytest.tech </strong> and password=
           <strong> admin</strong> to test the application )
         </p>
         <Inputs>

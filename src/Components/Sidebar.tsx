@@ -10,18 +10,26 @@ import {
 import logo from "../Assets/Logo.png";
 import {
   RiDashboardLine,
-  RiKey2Line,
-  RiCalendarEventFill,
   RiUser6Line,
 } from "react-icons/ri";
-import { HiOutlineMail } from "react-icons/hi";
 import { useNavigate } from "react-router";
+
+export function getLoggedUser() {
+  let userString = localStorage.getItem("user");
+  if (userString) {
+    const user = JSON.parse(userString);
+    return user
+
+  }
+}
 
 export const SideBar = () => {
   const navigate = useNavigate();
+
+  
     
     const clickHandler = () => {
-        navigate(`/Empleados/usuario1@midwaytest.tech`);
+        navigate(`empleados/usuario1@midwaytest.tech`);
     };
 
   return (
@@ -30,7 +38,7 @@ export const SideBar = () => {
         <img src={logo} alt="logo" />
         <div>
           <h2>Midway</h2>
-          <p>midway Employee Dashboard</p>
+          <p>Employee Dashboard</p>
         </div>
       </Logo>
       <LinkContainer>
@@ -40,9 +48,9 @@ export const SideBar = () => {
           </MenuLink>
         </li>
         <li>
-          <MenuLink to="/empleados">
+          <MenuLink to={`empleados/${getLoggedUser()}`}>
             <RiUser6Line />
-            Empleados
+            Empleado
           </MenuLink>
         </li>
       </LinkContainer>
@@ -51,9 +59,10 @@ export const SideBar = () => {
           src={"https://randomuser.me/api/portraits/lego/1.jpg"}
           alt="logo"
         ></SideBarUserImage>
-        <h5>Admin</h5>
-        <p>admin@admin.com</p>
-        <button onClick={clickHandler}>Edit User</button>
+        <h5>{getLoggedUser().nombre}</h5>
+        <p>{getLoggedUser().apellidos}</p>
+        <p>{getLoggedUser().upn}</p>
+        
       </User>
 
       <Copyright>

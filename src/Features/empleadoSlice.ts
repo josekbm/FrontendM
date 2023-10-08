@@ -1,39 +1,40 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Empleado } from "../interfaces";
 import { RootState } from "../app/store";
-import { CrossFetch } from "./API";
+import { AxiosRequest } from "./API";
 
 export const fetchEmpleados = createAsyncThunk<Empleado[], void>(
-  "Empleados/fetchEmpleados ",
+  "empleados/fetchEmpleados ",
   async () => {
-    const res = await CrossFetch("Empleados", "GET", null);
-    return res.data;
+    const res = await AxiosRequest("empleados", "GET", null);
+    console.log(res);
+    return res
   }
 );
 
 export const addEmpleado = createAsyncThunk<Empleado, Empleado>(
-  "Empleados/addEmpleado ",
+  "empleados/addEmpleado ",
   async (userObject) => {
-    const res = await CrossFetch("Empleado", "POST", JSON.stringify(userObject));
+    const res = await AxiosRequest("empleados", "POST", JSON.stringify(userObject));
 
     console.log(userObject);
     console.log(res);
-    return await res.data;
+    return await res;
   }
 );
 
-export const getEmpleado = createAsyncThunk<Empleado["UPN"], Empleado["UPN"]>(
-  "Empleados/getEmpleado ",
-  async (userId: Empleado["UPN"]) => {
-    const res = await CrossFetch(`Empleados/${userId}`, "GET", undefined);
-    return await res.data;
+export const getEmpleado = createAsyncThunk<Empleado["upn"], Empleado["upn"]>(
+  "empleados/getEmpleado ",
+  async (userId: Empleado["upn"]) => {
+    const res = await AxiosRequest(`empleados/${userId}`, "GET", undefined);
+    return await res;
   }
 );
 
-export const deleteEmpleado = createAsyncThunk<Empleado["UPN"], Empleado["UPN"]>(
+export const deleteEmpleado = createAsyncThunk<Empleado["upn"], Empleado["upn"]>(
   "Empleados/deleteEmpleado",
-  async (userId: Empleado["UPN"]) => {
-    const res = await CrossFetch(`Empleados/${userId}`, "DELETE", undefined);
+  async (userId: Empleado["upn"]) => {
+    const res = await AxiosRequest(`empleados/${userId}`, "DELETE", undefined);
     return await res.data;
   }
 );
@@ -41,8 +42,8 @@ export const deleteEmpleado = createAsyncThunk<Empleado["UPN"], Empleado["UPN"]>
 export const editEmpleado = createAsyncThunk<Empleado, Empleado>(
   "Empleado/editEmpleado",
   async (updatedUserObject: Empleado) => {
-    const res = await CrossFetch(`users/${updatedUserObject.UPN}`, "PUT", JSON.stringify(updatedUserObject));
-    console.log(updatedUserObject.UPN);
+    const res = await AxiosRequest(`empleados/${updatedUserObject.upn}`, "PUT", JSON.stringify(updatedUserObject));
+    console.log(updatedUserObject.upn);
     console.log(res);
     return await res.data;
   }
@@ -63,13 +64,13 @@ const initialState: UsersState = {
   EmpleadoListData: [],
   status: "idle",
   singleEmpleadoData: {
-    UPN: "",
+    upn: "",
     password: "",
-    Nombre: "",
-    Apellidos: "",
-    FechaNacimiento: "",
-    Responsable: "",
-    Rol: "" 
+    nombre: "",
+    apellidos: "",
+    fechaNacimiento: "",
+    responsable: "",
+    rol: "" 
   },
   singleEmpleadoStatus: "idle",
 };
@@ -101,15 +102,15 @@ export const empleadosSlice = createSlice({
       })
       .addCase(addEmpleado.fulfilled, (state, action) => {
         const lastId = parseInt(
-          state.EmpleadoListData[state.EmpleadoListData.length - 1].UPN.slice(2)
+          state.EmpleadoListData[state.EmpleadoListData.length - 1].upn.slice(2)
         );
-        action.payload.UPN = "U-" + (lastId + 1).toString().padStart(4, "0");
+        action.payload.upn = "U-" + (lastId + 1).toString().padStart(4, "0");
         state.EmpleadoListData.push(action.payload);
       })
 
       .addCase(deleteEmpleado.fulfilled, (state, action) => {
         state.EmpleadoListData = state.EmpleadoListData.filter(
-          (item) => item.UPN !== action.payload
+          (item) => item.upn !== action.payload
         );
         state.status = "fullfilled";
       })
@@ -130,7 +131,7 @@ export const empleadosSlice = createSlice({
       .addCase(editEmpleado.fulfilled, (state, action) => {
         state.status = "fulfilled";
         for (let i = 0; i < state.EmpleadoListData.length; i++) {
-          if (state.EmpleadoListData[i].UPN === action.payload.UPN) {
+          if (state.EmpleadoListData[i].upn === action.payload.upn) {
             state.EmpleadoListData[i] = action.payload;
             state.singleEmpleadoData = action.payload;
             return;

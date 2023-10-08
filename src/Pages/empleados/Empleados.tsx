@@ -4,13 +4,8 @@ import {
   fetchEmpleados,
 } from "../../Features/empleadoSlice";
 import { useEffect, useState } from "react";
-import { Button, StatusButton } from "../../Components/Button";
 import {
-  CustomDropdown,
   ImageItem,
-  LeftActions,
-  RightActions,
-  SearchBar,
   StyledLink,
   TableActions,
   TableItem,
@@ -24,10 +19,6 @@ import { Modal } from "../../Components/Modal";
 import { dateConverter } from "../../Features/otherFunctions";
 import { AiOutlineInfoCircle, AiOutlineSearch } from "react-icons/ai";
 import { VscTrash } from "react-icons/vsc";
-import {
-  MdOutlineKeyboardArrowDown,
-  MdOutlineKeyboardArrowUp,
-} from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import NotFound from "../notfoundpage/notfoundpage";
 import { Wrapper } from "../../Components/LayoutStyled";
@@ -45,16 +36,13 @@ export const Empleados = () => {
   const [orderValue, setOrderValue] = useState("ID");
 
   const tableTitles = [
-    "Name",
-    "Start Date",
-    "Description",
-    "Contact",
-    "Status",
-    "Details",
-    "Delete",
+    "Nombre y Apellidos",
+    "Cumpleaños",
+    "Rol",
+    "Responsable"    
   ];
 
-  const options = ["Date", "Name", "ID"];
+  const options = ["Birthday", "Name", "UPN"];
 
   useEffect(() => {
     if (empleadosStatus === "idle") {
@@ -156,27 +144,30 @@ export const Empleados = () => {
             </thead>
             <tbody>
               {tableData.map((element) => (
-                <TableRow key={element.UPN}>
+                <TableRow key={element.upn}>
                   <TableItem>
                     <ImageItem user>
-                      <UserTableImage src="https://randomEmpleado.me/api/portraits/lego/5.jpg" alt="user" />
+                      <UserTableImage src="https://randomuser.me/api/portraits/lego/5.jpg" alt="user" />
 
                       <div>
-                        {element.Nombre}
-                        <p>{element.UPN}</p>
+                        {element.nombre}
+                        <p>{element.apellidos}</p>
+                        <p>{element.upn}</p>
                       </div>
                     </ImageItem>
                   </TableItem>
                   <TableItem>
-                    {dateConverter(element.FechaNacimiento).date}
-                    <p>{dateConverter(element.FechaNacimiento).hour}</p>
+                    {dateConverter(element.fechaNacimiento).date}
+                    
                   </TableItem>
                   <TableItem>
-                    <p>{element.Responsable}</p>
-                    <p>{element.UPN}</p>
+                    <p>{element.rol}</p>
                   </TableItem>
                   <TableItem>
-                    <StyledLink to={`/empleados/${element.UPN}`}>
+                    {element.responsable}
+                  </TableItem>
+                  <TableItem>
+                    <StyledLink to={`/empleados/${element.upn}`}>
                       <AiOutlineInfoCircle />
                     </StyledLink>
                   </TableItem>
@@ -184,7 +175,7 @@ export const Empleados = () => {
                     <VscTrash
                       onClick={() => {
                         setShowDeleteModal(true);
-                        setTargetId(element.UPN);
+                        setTargetId(element.upn);
                       }}
                     />
                   </TableItem>

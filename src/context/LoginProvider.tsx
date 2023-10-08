@@ -2,26 +2,47 @@ import React, { createContext, useContext, useReducer } from "react";
 
 
 interface State {
-  mail: string;
+  upn: string;
   pass: string;
-  token: string;
+  token: {
+    message: string;
+    result: string;
+    upn: string;
+    nombre: string;
+    apellidos: string;
+    success: boolean;
+  };
   isLogged: boolean;
 }
 
 interface Action {
   type: string;
   user: {
-    mail: string;
+    upn: string;
     pass: string;
-    token: string;
+    token: {
+      message: string;
+      result: string;
+      upn: string;
+      nombre: string;
+      apellidos: string;
+      success: boolean;
+    };
   };
 }
 
 interface Context {
   user: {
-    mail: string;
+    upn: string;
     pass: string;
-    token: string;
+    token: {
+      message: string;
+      result: string;
+      upn: string;
+      nombre: string;
+      apellidos: string;
+      success: boolean;
+    };
     isLogged: boolean;
   };
   dispatch?: any;
@@ -29,9 +50,16 @@ interface Context {
 
 const initialContext: Context = {
   user: {
-    mail: "",
+    upn: "",
     pass: "",
-    token: "",
+    token: {
+      message: "",
+      result: "",
+      upn: "",
+      nombre: "",
+      apellidos: "",
+      success: false,
+    },
     isLogged: false,
   },
 };
@@ -49,18 +77,20 @@ const reducer = (state: State, action: Action) => {
         localStorage.setItem(
           "user",
           JSON.stringify({
-            mail: action.user.mail,
-            token: action.user.token,
+            upn: action.user.token.upn,
+            nombre: action.user.token.nombre,
+            apellidos: action.user.token.apellidos,
+            token: action.user.token.result,
             isLogged: true,
           })
         );
-        return { ...state, mail: action.user.mail, isLogged: true };
+        return { ...state, UPN: action.user.upn, isLogged: true };
       } else {
         return { ...state, isLogged: false };
       }
     case "logout":
       localStorage.removeItem("user");
-      return { ...state, mail: "", isLogged: false };
+      return { ...state, UPN: "", isLogged: false };
     default:
       return { ...state };
   }
@@ -69,7 +99,7 @@ const reducer = (state: State, action: Action) => {
 const LoginProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  let userEmpty = { mail: "", isLogged: false };
+  let userEmpty = { UPN: "", isLogged: false };
 
   const [user, dispatch] = useReducer(
     reducer,

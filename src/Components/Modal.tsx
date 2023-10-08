@@ -1,13 +1,10 @@
-import { ArchiveButton, Button } from "./Button";
+import { Button } from "./Button";
 import { ModalButtonRow, ModalCloseRow, ModalContainer } from "./ModalStyled";
 import { IoClose } from "react-icons/io5";
 import { addEmpleado, deleteEmpleado, fetchEmpleados} from "../Features/empleadoSlice";
 import {
   FormContainer,
-  Input,
-  InputBig,
-  Label,
-  RadioInput,
+  Input
 } from "./FormStyled";
 import {
   dateConverter,
@@ -32,7 +29,7 @@ interface ModalProps {
   setShowNotesModal?: Dispatch<SetStateAction<boolean>>,
   
 }
-export const Modal = ({page, itemId, setShowDeleteModal, setShowCreateModal, showDeleteModal, showCreateModal, mode, showModal, setShowModal, showNotesModal, setShowNotesModal} : ModalProps) => {
+export const Modal = ({page, itemId, setShowDeleteModal, setShowCreateModal, showDeleteModal, showCreateModal, mode} : ModalProps) => {
   const dispatch = useAppDispatch();
   const [fieldError, setFieldError] = useState("");
   const navigate = useNavigate();
@@ -78,13 +75,13 @@ export const Modal = ({page, itemId, setShowDeleteModal, setShowCreateModal, sho
       } else {
         const empleado = {
           
-          UPN: empleadoUPN,
-          Nombre: empleadoNombre,
-          Apellidos: empleadoApellidos,
-          FechaNacimiento: empleadoFechaNacimiento,
+          upn: empleadoUPN,
+          nombre: empleadoNombre,
+          apellidos: empleadoApellidos,
+          fechaNacimiento: empleadoFechaNacimiento,
           password: empleadoPassword,
-          Responsable: empleadoResponsable,
-          Rol: empleadoRol,
+          responsable: empleadoResponsable,
+          rol: empleadoRol,
           
         };
         dispatch(addEmpleado(empleado)).then(() => {

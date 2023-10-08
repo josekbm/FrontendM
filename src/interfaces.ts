@@ -1,11 +1,11 @@
 export interface Empleado{
     
-    UPN: string;
+    upn: string;
     password: string;
-    Nombre: string;
-    Apellidos: string;
-    FechaNacimiento: string;
-    Responsable: string;
-    Rol: string    
+    nombre: string;
+    apellidos: string;
+    fechaNacimiento: string;
+    responsable: string;
+    rol: string    
 }
 
