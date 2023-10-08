@@ -11,6 +11,7 @@ import logo from "../Assets/Logo.png";
 import {
   RiDashboardLine,
   RiUser6Line,
+  RiOrganizationChart
 } from "react-icons/ri";
 import { useNavigate } from "react-router";
 
@@ -18,6 +19,7 @@ export function getLoggedUser() {
   let userString = localStorage.getItem("user");
   if (userString) {
     const user = JSON.parse(userString);
+    console.log(user)
     return user
 
   }
@@ -48,14 +50,14 @@ export const SideBar = () => {
           </MenuLink>
         </li>
         <li>
-          <MenuLink to={`empleados/${getLoggedUser()}`}>
+          <MenuLink to={`empleados/${getLoggedUser().upn}`}>
             <RiUser6Line />
             Empleado
           </MenuLink>
         </li>
         <li>
-          <MenuLink to="/empleados2">
-            <RiDashboardLine /> Empleados2
+          <MenuLink to="/organigrama">
+            <RiOrganizationChart /> Organigrama
           </MenuLink>
         </li>
       </LinkContainer>

@@ -13,11 +13,13 @@ export const Layout = () => {
 
   const titleChooser = () => {
     if (location.pathname === "/") {
-      title = "Dashboard";
+      title = "Datos del Equipo";
     } else if(location.pathname === "/empleados") {
       title = "Empleados";
     } else if (employeeMatch != null && location.pathname === employeeMatch.pathname) {
       title = "Ficha Personal";
+    }else if (location.pathname === "/organigrama") {
+      title = "Organigrama";
     }
 
     return title;

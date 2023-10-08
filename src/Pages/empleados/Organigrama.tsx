@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Wrapper } from '../../Components/LayoutStyled';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 
-const Empleados2 = () => {
+const Organigrama = () => {
   const dispatch = useAppDispatch();
   const empleadosData = useAppSelector(getEmpleadosData);
   const [treeData, setTreeData] = useState<any>(null);
@@ -49,4 +49,4 @@ const Empleados2 = () => {
   );
 };
 
-export default Empleados2;
+export default Organigrama;
