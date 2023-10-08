@@ -53,6 +53,11 @@ export const SideBar = () => {
             Empleado
           </MenuLink>
         </li>
+        <li>
+          <MenuLink to="/empleados2">
+            <RiDashboardLine /> Empleados2
+          </MenuLink>
+        </li>
       </LinkContainer>
       <User>
         <SideBarUserImage

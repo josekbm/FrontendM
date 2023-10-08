@@ -7,9 +7,7 @@ import { useEffect, useState } from "react";
 import {
   ImageItem,
   StyledLink,
-  TableActions,
   TableItem,
-  TableLink,
   UserTableImage,
   TableRow,
   TableContainer,
@@ -39,7 +37,7 @@ export const Empleados = () => {
     "Nombre y Apellidos",
     "Cumpleaños",
     "Rol",
-    "Responsable"    
+    "Responsable",
   ];
 
   const options = ["Birthday", "Name", "UPN"];
@@ -50,77 +48,6 @@ export const Empleados = () => {
     }
     setTableData(empleadosData);
   }, [dispatch, empleadosStatus, empleadosData]);
-
-  /*const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const input = e.target as HTMLElement;
-    const option = input.innerText;
-    if (option === "All users") {
-      setShowAll("true");
-      setShowActive("false");
-      setShowInactive("false");
-      setOrderValue("ID");
-      setTableData(usersData);
-    } else if (option === "Active users") {
-      setShowActive("true");
-      setShowAll("false");
-      setShowInactive("false");
-      setOrderValue("ID");
-      setTableData(empleadosData.filter((user) => user.state === "ACTIVE"));
-    } else if (option === "Inactive users") {
-      setShowActive("false");
-      setShowAll("false");
-      setShowInactive("true");
-      setOrderValue("ID");
-      setTableData(usersData.filter((user) => user.state === "INACTIVE"));
-    }
-  };*/
-
-  /*const onSearchInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTableData(
-      tableData.filter((user) =>
-        Empleados.Nombre.toLowerCase().includes(e.target.value.toLowerCase())
-      )
-    );
-    if (e.target.value === "") {
-      if (showAll === "true") {
-        setTableData(usersData);
-      }
-      if (showActive === "true") {
-        setTableData(usersData.filter((user) => user.state === "ACTIVE"));
-      }
-      if (showInactive === "true") {
-        setTableData(usersData.filter((user) => user.state === "INACTIVE"));
-      }
-    }
-  };*/
-
-  /*const onChangeHandler = (e: any) => {
-    const option = e.value;
-    console.log(option);
-    if (option === "ID") {
-      setTableData(empleadossData);
-    }
-    if (option === "Name") {
-      setOrderValue("Name");
-      setTableData(
-        [...tableData].sort((a, b) => {
-          if (a.name < b.name) return -1;
-          if (a.name > b.name) return 1;
-          return 0;
-        })
-      );
-    }
-    if (option === "Date") {
-      setOrderValue("Date");
-      setTableData(
-        [...tableData].sort((a, b) => {
-          if (a.startDate < b.startDate) return -1;
-          if (a.startDate > b.startDate) return 1;
-          return 0;
-        })
-      );
-    }
-  };*/
 
   if (empleadosStatus === "pending") {
     return (
@@ -147,7 +74,10 @@ export const Empleados = () => {
                 <TableRow key={element.upn}>
                   <TableItem>
                     <ImageItem user>
-                      <UserTableImage src="https://randomuser.me/api/portraits/lego/5.jpg" alt="user" />
+                      <UserTableImage
+                        src="https://randomuser.me/api/portraits/lego/5.jpg"
+                        alt="user"
+                      />
 
                       <div>
                         {element.nombre}
@@ -158,14 +88,11 @@ export const Empleados = () => {
                   </TableItem>
                   <TableItem>
                     {dateConverter(element.fechaNacimiento).date}
-                    
                   </TableItem>
                   <TableItem>
                     <p>{element.rol}</p>
                   </TableItem>
-                  <TableItem>
-                    {element.responsable}
-                  </TableItem>
+                  <TableItem>{element.responsable}</TableItem>
                   <TableItem>
                     <StyledLink to={`/empleados/${element.upn}`}>
                       <AiOutlineInfoCircle />
