@@ -46,9 +46,7 @@
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "cypress:open": "cypress open",
-    "cypress-run": "cypress run"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -70,7 +68,6 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
-    "cypress": "^12.17.1",
     "jest-styled-components": "^7.1.1",
     "react-test-renderer": "^18.2.0"
   }
