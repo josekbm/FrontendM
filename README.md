@@ -1,19 +1,22 @@
-# Miranda's Dashboard
-Dashboard application for Hotel Miranda's staff management made with React, Redux, TypeScript and connected to an API made with Node.js that manages the connection between the front-end and the backend data in a MongoDB database. This app can only be displayed on desktop version.
+# Frontend-Midway
+Frontend realizado en React con TypeScript para consumir la API del proyecto https://github.com/josekbm/Prueba-tecnica-Midway
 
-## 🖥️ Install and Run Locally
-## Clone the project
+## 🖥️ Instalar y ejecutar de manera local
+## Clonar el proyecto
 
-git clone https://github.com/josekbm/dashboard-miranda.git
+git clone https://github.com/josekbm/Frontend-Midway
 
-## Go to the project directory
+## Ir al directorio del proyecto
 
-cd dashboard-miranda
+cd Frontend-Midway
 
-## Install dependencies
+## Instalar dependencias y crear archivo .env
 
-npm install
+npm install --legacy-peer-deps
+Crear archivo .env en la raíz del proyecto. Debe contener la siguiente información REACT_APP_API_URL={puerto en el que se está ejecutando la API "http:/localhost:XXXX/"}
 
 ## Start the server
 
 npm start
+
+Iniciar sesión con los datos que aparecen en la pantalla de Login.
