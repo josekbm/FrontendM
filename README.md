@@ -1,14 +1,14 @@
 # Frontend-Midway
-Frontend realizado en React con TypeScript para consumir la API del proyecto https://github.com/josekbm/Prueba-tecnica-Midway
+Frontend realizado en React con TypeScript para consumir la API del proyecto https://github.com/josekbm/PruebaM
 
 ## 🖥️ Instalar y ejecutar de manera local
 ## Clonar el proyecto
 
-git clone https://github.com/josekbm/Frontend-Midway
+git clone https://github.com/josekbm/FrontendM
 
 ## Ir al directorio del proyecto
 
-cd Frontend-Midway
+cd FrontendM
 
 ## Instalar dependencias y crear archivo .env
 
