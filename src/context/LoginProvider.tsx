@@ -10,6 +10,7 @@ interface State {
     upn: string;
     nombre: string;
     apellidos: string;
+    fechaNacimiento:string;
     success: boolean;
   };
   isLogged: boolean;
@@ -26,6 +27,7 @@ interface Action {
       upn: string;
       nombre: string;
       apellidos: string;
+      fechaNacimiento:string;
       success: boolean;
     };
   };
@@ -41,6 +43,7 @@ interface Context {
       upn: string;
       nombre: string;
       apellidos: string;
+      fechaNacimiento:string;
       success: boolean;
     };
     isLogged: boolean;
@@ -58,6 +61,7 @@ const initialContext: Context = {
       upn: "",
       nombre: "",
       apellidos: "",
+      fechaNacimiento:"",
       success: false,
     },
     isLogged: false,
@@ -80,6 +84,7 @@ const reducer = (state: State, action: Action) => {
             upn: action.user.token.upn,
             nombre: action.user.token.nombre,
             apellidos: action.user.token.apellidos,
+            cumpleaños: action.user.token.fechaNacimiento,
             token: action.user.token.result,
             isLogged: true,
           })

@@ -19,7 +19,6 @@ export function getLoggedUser() {
   let userString = localStorage.getItem("user");
   if (userString) {
     const user = JSON.parse(userString);
-    console.log(user)
     return user
 
   }

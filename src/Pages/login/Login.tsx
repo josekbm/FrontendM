@@ -7,6 +7,7 @@ import logo from "../../Assets/Logo.png";
 import { useLogin } from "../../context/LoginProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { toastSuccess, toastWarning } from "../../Features/toastify";
 
 let toastMSG = (msg = "Wrong User") => {
   toast.error(msg, {
@@ -30,12 +31,10 @@ const loginApi = async (UPN: String, password: String) => {
       headers: { "Content-type": "application/json;charset=UTF-8" },
       
     });
-    console.log(response.data)
     if (!response.data.success) {
       toastMSG("Wrong User");
     } else {
       const data = response.data;
-      console.log(data)
       return data;
     }
   } catch (e) {
@@ -54,6 +53,40 @@ export function Login(props: any) {
     }
   });
 
+  const calcularDiasCumpleanos = (fechaNacimiento: Date) => {
+    const hoy = new Date();
+    const proximoCumpleanos = new Date(
+      hoy.getFullYear(),
+      fechaNacimiento.getMonth(),
+      fechaNacimiento.getDate()
+    )
+    if (proximoCumpleanos < hoy) {
+      proximoCumpleanos.setFullYear(hoy.getFullYear() + 1);
+    }
+    const unDiaEnMilisegundos = 24 * 60 * 60 * 1000;
+    const diferenciaEnDias = Math.floor((proximoCumpleanos.getTime() - hoy.getTime()) / unDiaEnMilisegundos);
+
+    return diferenciaEnDias;
+  }
+
+  const cumpleanos = localStorage.getItem("user");
+  
+  if (cumpleanos) {
+    const user = JSON.parse(cumpleanos)
+    const fechaCumpleanos = new Date(user.cumpleaños)
+
+    const diasHastaCumpleanos = calcularDiasCumpleanos(fechaCumpleanos)
+
+    if (diasHastaCumpleanos === 0) {
+      toastSuccess("Feliz Cumpleaños!!🥳🥳🥳🎂🎂🎂")
+    }
+    if(diasHastaCumpleanos === 1){
+      toastSuccess("Mañana es tu cumple, prepárate! 😜")
+    }else{
+      toastWarning(`Faltan ${diasHastaCumpleanos} dias para tu cumpleaños! 🤯`)
+    }
+  }
+
   const handleForm = async (
     event: React.ChangeEvent<HTMLInputElement & HTMLFormElement>
   ) => {
@@ -71,6 +104,7 @@ export function Login(props: any) {
     login.dispatch({ type: "login", user: { mail, pass, token } });
     setTimeout(() => {
       if (localStorage.getItem("token")) {
+        
       }
     }, 100);
     setTimeout(() => navigate("/"), 100);
