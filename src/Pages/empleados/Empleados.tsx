@@ -12,7 +12,9 @@ import {
   TableRow,
   TableContainer,
   TableTitle,
+  TableActions,
 } from "../../Components/TableStyled";
+import { Button } from "../../Components/Button";
 import { Modal } from "../../Components/Modal";
 import { dateConverter } from "../../Features/otherFunctions";
 import { AiOutlineInfoCircle, AiOutlineSearch } from "react-icons/ai";
@@ -61,6 +63,19 @@ export const Empleados = () => {
     if (empleadosStatus === "fulfilled" && tableData.length > 0) {
       return (
         <>
+          <TableActions>
+            {showAll === "true" ? (
+                <Button
+                  onClick={() => {
+                    setShowCreateModal(true);
+                  }}
+                >
+                  + New{" "}
+                </Button>
+            ) : (
+                  ""
+            )}
+          </TableActions>
           <TableContainer>
             <thead>
               <TableTitle>

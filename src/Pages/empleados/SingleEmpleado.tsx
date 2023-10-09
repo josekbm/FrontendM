@@ -134,6 +134,7 @@ export const SingleEmpleado = () => {
                   </UserImage>
                   <CardTitle>
                     <h2>{getEmpleadoData.nombre}</h2>
+                    <h2>{getEmpleadoData.apellidos}</h2>
                     <h5>{getEmpleadoData.rol}</h5>
                   </CardTitle>
                 </TitleRow>
@@ -201,6 +202,19 @@ export const SingleEmpleado = () => {
                     </CardItem>
                     <CardItem>
                       <Input>
+                        <h6>Apellidos</h6>
+                        <input
+                          type="text"
+                          name="apellidos"
+                          defaultValue={empleadoApellidos}
+                          onInput={(e) => {
+                            setEmpleadoApellidos(e.currentTarget.value);
+                          }}
+                        />
+                      </Input>
+                    </CardItem>
+                    <CardItem>
+                      <Input>
                         <h6>Rol</h6>
                         <select
                           name="rol"
@@ -209,7 +223,7 @@ export const SingleEmpleado = () => {
                             setEmpleadoRol(e.target.value);
                           }}
                         >
-                          <option>Administrado</option>
+                          <option>Administrador</option>
                           <option>Desarrollador</option>
                           <option>Arquitecto</option>
                           <option>Mánager</option>

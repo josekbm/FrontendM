@@ -48,12 +48,12 @@ export const Modal = ({page, itemId, setShowDeleteModal, setShowCreateModal, sho
   
 
   const onClickDeleteHandler = () => {
-    if (page === "Empleados" && setShowDeleteModal && itemId) {
+    if (page === "empleados" && setShowDeleteModal && itemId) {
       dispatch(deleteEmpleado(itemId)).then(()=> {
         dispatch(fetchEmpleados())
-        toastSuccess("Empleado Deleted!")
+        toastSuccess("Empleado Borrado!")
       });
-      navigate("/Empleados")
+      navigate("/")
       setShowDeleteModal(false);
     }
        
@@ -61,7 +61,7 @@ export const Modal = ({page, itemId, setShowDeleteModal, setShowCreateModal, sho
 
   const onCreateSubmitHandler = (event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (page === "Empleados") {
+    if (page === "empleados") {
       if (
         empleadoUPN === "" ||
         empleadoPassword === "" ||
@@ -88,7 +88,7 @@ export const Modal = ({page, itemId, setShowDeleteModal, setShowCreateModal, sho
           dispatch(fetchEmpleados())
           toastSuccess("Empleado created!")          
         })
-        navigate("/Empleados")
+        navigate("/")
         
         if(setShowCreateModal){
           setShowCreateModal(false);
@@ -124,10 +124,10 @@ export const Modal = ({page, itemId, setShowDeleteModal, setShowCreateModal, sho
               }}
             />
           </ModalCloseRow>
-          <h2>Are you sure that yo want to delete this item?</h2>
+          <h2>Estás seguro de que quieres borrar a este usuario?</h2>
           <ModalButtonRow>
             <Button type="delete" onClick={onClickDeleteHandler}>
-              Delete
+              Borrar
             </Button>
             <Button
               onClick={() => {
@@ -135,7 +135,7 @@ export const Modal = ({page, itemId, setShowDeleteModal, setShowCreateModal, sho
                   setShowDeleteModal(false);
               }}
             >
-              Cancel
+              Cancelar
             </Button>
           </ModalButtonRow>
         </ModalContainer>
@@ -143,7 +143,7 @@ export const Modal = ({page, itemId, setShowDeleteModal, setShowCreateModal, sho
     );
   }
   if (mode === "create") {
-    if (page === "Empleados") {
+    if (page === "empleados") {
       return (
         <>
           <ModalContainer show={showCreateModal} top>
@@ -161,22 +161,22 @@ export const Modal = ({page, itemId, setShowDeleteModal, setShowCreateModal, sho
               <p>{fieldError}</p>
 
               <Input>
-                <label htmlFor="image">Image Link</label>
-                <input
-                  type="link"
-                  name="image"
-                  onChange={(e) => {
-                    setEmpleadoImage(e.target.value);
-                  }}
-                />
-              </Input>
-              <Input>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">Nombre</label>
                 <input
                   type="text"
                   name="name"
                   onChange={(e) => {
                     setEmpleadoNombre(e.target.value);
+                  }}
+                />
+              </Input>
+              <Input>
+                <label htmlFor="name">Apellidos</label>
+                <input
+                  type="text"
+                  name="apellidos"
+                  onChange={(e) => {
+                    setEmpleadoApellidos(e.target.value);
                   }}
                 />
               </Input>
@@ -189,9 +189,11 @@ export const Modal = ({page, itemId, setShowDeleteModal, setShowCreateModal, sho
                     setEmpleadoRol(e.target.value);
                   }}
                 >
-                  <option>Manager</option>
-                  <option>Recepcionist</option>
-                  <option>Room Service</option>
+                  <option>Administrador</option>
+                  <option>Mánager</option>
+                  <option>Arquitecto</option>
+                  <option>Desarrollador</option>
+                  <option>Técnico</option>
                 </select>
               </Input>
               <Input>

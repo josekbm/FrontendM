@@ -32,20 +32,20 @@ export const getEmpleado = createAsyncThunk<Empleado["upn"], Empleado["upn"]>(
 );
 
 export const deleteEmpleado = createAsyncThunk<Empleado["upn"], Empleado["upn"]>(
-  "Empleados/deleteEmpleado",
+  "empleados/deleteEmpleado",
   async (userId: Empleado["upn"]) => {
     const res = await AxiosRequest(`empleados/${userId}`, "DELETE", undefined);
-    return await res.data;
+    return await res;
   }
 );
 
 export const editEmpleado = createAsyncThunk<Empleado, Empleado>(
-  "Empleado/editEmpleado",
+  "empleado/editEmpleado",
   async (updatedUserObject: Empleado) => {
     const res = await AxiosRequest(`empleados/${updatedUserObject.upn}`, "PUT", JSON.stringify(updatedUserObject));
     console.log(updatedUserObject.upn);
     console.log(res);
-    return await res.data;
+    return await res;
   }
 );
 
@@ -101,10 +101,6 @@ export const empleadosSlice = createSlice({
         state.status = "pending";
       })
       .addCase(addEmpleado.fulfilled, (state, action) => {
-        const lastId = parseInt(
-          state.EmpleadoListData[state.EmpleadoListData.length - 1].upn.slice(2)
-        );
-        action.payload.upn = "U-" + (lastId + 1).toString().padStart(4, "0");
         state.EmpleadoListData.push(action.payload);
       })
 
@@ -131,7 +127,7 @@ export const empleadosSlice = createSlice({
       .addCase(editEmpleado.fulfilled, (state, action) => {
         state.status = "fulfilled";
         for (let i = 0; i < state.EmpleadoListData.length; i++) {
-          if (state.EmpleadoListData[i].upn === action.payload.upn) {
+          if (state.EmpleadoListData && state.EmpleadoListData[i].upn === action.payload.upn) {
             state.EmpleadoListData[i] = action.payload;
             state.singleEmpleadoData = action.payload;
             return;
